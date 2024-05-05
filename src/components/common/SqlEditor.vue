@@ -1,15 +1,30 @@
 <template>
-    <Codemirror v-model:value="sqlQuery" :options="cmOptions" border ref="cmRef" class="code__mirror--editor"
-        height="346" width="500">
+    <Codemirror :key="theme" v-model:value="sqlQuery" :options="cmOptions" border ref="cmRef"
+        class="code__mirror--editor" height="346" style="width: 100%;">
     </Codemirror>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted, computed } from "vue"
+import { ref, onMounted, onUnmounted, computed, defineProps } from "vue"
 import "codemirror/mode/javascript/javascript.js"
 import "codemirror/mode/sql/sql.js";
+import "codemirror/theme/ayu-dark.css"
+import "codemirror/theme/cobalt.css"
+import "codemirror/theme/elegant.css"
 import Codemirror from "codemirror-editor-vue3"
 import { useAppStore } from '@/store/index'
+const props = defineProps(
+    {
+        'width': {
+            type: String,
+            default: "500"
+        },
+        'theme': {
+            type: String,
+            default: "default"
+        }
+    },
 
+)
 const store = useAppStore()
 
 // const sqlQuery = computed(() => store.sqlQuery)
@@ -36,7 +51,8 @@ const code = ref(
 
 const cmRef = ref()
 const cmOptions = {
-    mode: "sql"
+    mode: "sql",
+    theme: props.theme
 }
 
 

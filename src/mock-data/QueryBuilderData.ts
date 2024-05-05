@@ -1,3 +1,13 @@
+export interface tableColumn
+{
+    "column_name": string,
+    "column_default": null,
+    "data_type": string,
+    "is_nullable": string,
+    "character_maximum_length": number,
+    "numeric_precision": null
+}
+
 export const tableData={
     columns:[
         {
@@ -91,3 +101,17 @@ export const tableData={
           }
     ]
 }
+
+export const filterOperations={
+    "varchar":[
+        "NULL",
+        "NOT NULL",
+        "PRESENT",
+        'LIKE',
+        'NOT LIKE',
+        'IS NOT',
+        'STARTS WITH',
+        'ENDS WITH',
+        'CONTAINS'
+    ]
+} as any

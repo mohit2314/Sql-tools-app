@@ -1,6 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useAppStore } from '@/store/index'
+
+const store = useAppStore()
 const selectedMenu = ref('dashboard')
+
+const showWorkspacePanel = computed({
+    get() {
+        return store.showWorkspacePanel
+    },
+    set(val) {
+        store.showWorkspacePanel = val
+    }
+})
+
 </script>
 <template>
     <div class="left__navigation--sidebar">
@@ -24,7 +37,12 @@ const selectedMenu = ref('dashboard')
                 :class="['left__navigation-item', { '--active': selectedMenu == 'history' }]">
                 <i class="pi pi-history" style="font-size: 1.5rem"></i>
             </div>
-
+            <div v-if="$route.path.includes('sql-query-builder')" @click="showWorkspacePanel = !showWorkspacePanel"
+                :class="['left__navigation-item', { '--active': selectedMenu == 'history' }]">
+                <i class="pi pi-briefcase   " style="font-size: 1.5rem"></i>
+            </div>
+            <span v-if="!showWorkspacePanel" class="workspace__collapse-btn"
+                @click="showWorkspacePanel = !showWorkspacePanel"><i class="light-icon-chevron-right"></i></span>
         </div>
         <div>
             <div @click="selectedMenu = 'support'"
@@ -76,6 +94,23 @@ const selectedMenu = ref('dashboard')
         border-radius: 2px;
         box-shadow: 0 0 3px #00000023;
         background-color: #0080801a;
+    }
+
+    .workspace__collapse-btn {
+        // border: 1px solid #dedede;
+        border-radius: 50%;
+        padding: .2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        cursor: pointer;
+        position: absolute;
+        right: -10px;
+        // top: 60px;
+        bottom: 50%;
+        background-color: #27BEAD;
+        color: #fff;
     }
 }
 </style>

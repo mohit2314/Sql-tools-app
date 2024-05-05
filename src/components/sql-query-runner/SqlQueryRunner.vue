@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import LeftPanel from "@/components/sql-query-runner/LeftPanel.vue"
 import SqlEditor from "@/components/common/SqlEditor.vue";
 import ResultTable from "@/components/common/ResultTable.vue";
@@ -77,6 +77,19 @@ const saveQuery = () => {
 
 
 }
+onMounted(() => {
+    let builderTemplateQuery = `CREATE TABLE customer
+        (
+              "ID" int8 PRIMARY KEY,
+              "Name" varchar(50) NOT NULL,
+              "Age" int NOT NULL,
+              "City" char(50),
+              "Salary" numeric
+        );
+          
+          `
+    store.updateSqlQuery(builderTemplateQuery)
+})
 </script>
 
 <template>

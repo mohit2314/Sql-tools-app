@@ -23,7 +23,14 @@ const availableDatabases = computed(() => store.availableDatabases)
 // const availableTables = computed(() => {
 // databases.filter((db:Database)=>  db.name == selectedDatabase.value?.name)
 // })
-
+const showWorkspacePanel = computed({
+    get() {
+        return store.showWorkspacePanel
+    },
+    set(val) {
+        store.showWorkspacePanel = val
+    }
+})
 onMounted(() => {
     WorkspaceService.getWorkspaceNodesData().then((data) => (nodes.value = data));
 });
@@ -83,9 +90,13 @@ const items = ref([
 
             <i class="pi pi-briefcase" color="bg-primary"></i>
             <span class="font-medium text-xl font-semibold">WORK<span class="text-primary">SPACES</span></span>
+
         </span>
+
         <Divider />
-        <div class="flex flex-column gap-4 p-2">
+        <div class="flex flex-column gap-4 p-2" style="position: relative;">
+            <span class="workspace__collapse-btn" @click="showWorkspacePanel = !showWorkspacePanel"><i
+                    class="light-icon-chevron-left"></i></span>
             <div class="flex flex-column gap-2 w-full">
                 <label for="workspacesDropdown" class="text-primary font-bold"><i
                         class="pi pi-briefcase mr-2"></i>Select your
@@ -124,12 +135,14 @@ const items = ref([
     border-right: 1px solid #dedede;
     height: calc(100vh - 56px);
 
+
     .header {
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: #dedede;
         padding: 1rem;
+        position: relative;
     }
 
     // padding: ;
@@ -154,6 +167,23 @@ const items = ref([
         li>div {
             justify-content: flex-start !important;
         }
+    }
+
+    .workspace__collapse-btn {
+        // border: 1px solid #dedede;
+        border-radius: 50%;
+        padding: .2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        cursor: pointer;
+        position: absolute;
+        right: -10px;
+        // top: 60px;
+        bottom: 0px;
+        background-color: #27BEAD;
+        color: #fff;
     }
 }
 </style>

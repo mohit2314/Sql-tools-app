@@ -4,8 +4,17 @@ import LeftPanel from "./LeftPanel.vue";
 import { tableData } from "@/mock-data/QueryBuilderData";
 import ColumnsBlock from "./builder-blocks/ColumnsBlock.vue";
 import FilterBlock from "./builder-blocks/FilterBlock.vue";
+import JoinBlock from "./builder-blocks/JoinBlock.vue";
+import LimitBlock from "./builder-blocks/LimitBlock.vue";
+import SortBlock from "./builder-blocks/SortBlock.vue";
+import SummarizeBlock from "./builder-blocks/SummarizeBlock.vue";
+import GroupByBlock from "./builder-blocks/GroupByBlock.vue";
 
-const selectedColumns = ref()
+const selectedColumns = ref([])
+const setColumns = (e: any) => {
+    console.log('columns', e)
+    selectedColumns.value = e
+}
 </script>
 
 <template>
@@ -17,72 +26,13 @@ const selectedColumns = ref()
             </div>
             <div>
 
-                <Accordion :activeIndex="0" expandIcon="pi pi-plus" collapseIcon="pi pi-minus">
-                    <AccordionTab>
-                        <template #header>
-                            <span class="flex align-items-center gap-2 w-full">
-                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-                                    shape="circle" />
-                                <span class="font-bold white-space-nowrap">Amy Elsner</span>
-                                <Badge value="3" class="ml-auto mr-2" />
-                            </span>
-                        </template>
-                        <p class="m-0">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.
-                        </p>
-                    </AccordionTab>
-                    <AccordionTab class="mt-4">
-                        <template #header>
-                            <span class="flex align-items-center gap-2 w-full">
-                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
-                                    shape="circle" />
-                                <span class="font-bold white-space-nowrap">Onyama Limba</span>
-                                <Badge value="4" class="ml-auto mr-2" />
-                            </span>
-                        </template>
-                        <p class="m-0">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem
-                            aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                            sunt explicabo. Nemo
-                            enim
-                            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                            magni dolores eos qui
-                            ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
-                            modi.
-                        </p>
-                    </AccordionTab>
-                    <AccordionTab>
-                        <template #header>
-                            <span class="flex align-items-center gap-2 w-full">
-                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png"
-                                    shape="circle" />
-                                <span class="font-bold white-space-nowrap">Ioni Bowcher</span>
-                                <Badge value="2" class="ml-auto mr-2" />
-                            </span>
-                        </template>
-                        <p class="m-0">
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                            voluptatum deleniti atque
-                            corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
-                            similique sunt in
-                            culpa qui
-                            officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
-                            facilis est et expedita
-                            distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                            minus.
-                        </p>
-                    </AccordionTab>
-                </Accordion>
-                <ColumnsBlock />
-                <FilterBlock />
+                <ColumnsBlock @selectedColumnsEvent="setColumns" />
+                <FilterBlock :selectedColumns="selectedColumns" />
+                <JoinBlock />
+                <SortBlock />
+                <SummarizeBlock />
+                <GroupByBlock />
+                <LimitBlock />
             </div>
         </div>
     </div>

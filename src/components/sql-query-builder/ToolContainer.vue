@@ -1,17 +1,27 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import LeftPanel from "./LeftPanel.vue";
 import { tableData } from "@/mock-data/QueryBuilderData";
 import SqlQueryBuilder from "./SqlQueryBuilder.vue";
 import RightPanel from "./RightPanel.vue";
+import { useAppStore } from '@/store/index'
 
+const store = useAppStore()
 const selectedColumns = ref()
+const showWorkspacePanel = computed({
+    get() {
+        return store.showWorkspacePanel
+    },
+    set(val) {
+        store.showWorkspacePanel = val
+    }
+})
 </script>
 
 <template>
     <div class="sql__builder--tool">
 
-        <LeftPanel />
+        <LeftPanel v-if="showWorkspacePanel" />
         <div class="sql__runner--center-panel">
             <SqlQueryBuilder />
         </div>

@@ -36,7 +36,9 @@ export const useAppStore = defineStore('appStore', {
         availableDatabases: [
             { name: "Database 1", tables: ["Table 1", "Table 2", "Table 3"] },
             { name: "Database 2", tables: ["Table A", "Table B", "Table C"] },
-        ] as  Database[] 
+        ] as  Database[],
+
+        showWorkspacePanel:true
     }),
     actions: {
       increment() {
@@ -47,6 +49,9 @@ export const useAppStore = defineStore('appStore', {
       },
       changeLoading(loadingVal:boolean){
         this.sqlRunnerLoading=loadingVal
+      },
+      changeWorkspacePanelVisiblity(payload:boolean){
+        this.showWorkspacePanel=payload
       }
     },
 })

@@ -17,6 +17,7 @@ import BadgeDirective from 'primevue/badgedirective';
 import ToastService from 'primevue/toastservice';
 import { createPinia } from 'pinia'
 import "light-icons/dist/light-icon.css";
+//@ts-ignore
 import LvCollapsible from 'lightvue/collapsible';
 const pinia = createPinia()
 const app = createApp(App)
