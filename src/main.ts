@@ -19,6 +19,8 @@ import { createPinia } from 'pinia'
 import "light-icons/dist/light-icon.css";
 //@ts-ignore
 import LvCollapsible from 'lightvue/collapsible';
+//@ts-ignore
+import Chat from 'vue3-beautiful-chat'
 const pinia = createPinia()
 const app = createApp(App)
 
@@ -28,4 +30,5 @@ app.use(router)
 app.use(pinia)
 app.use(ToastService);
 app.component('LvCollapsible', LvCollapsible);
+app.use(Chat)
 app.mount('#app')

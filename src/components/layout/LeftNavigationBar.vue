@@ -29,10 +29,10 @@ const showWorkspacePanel = computed({
                 :class="['left__navigation-item', { '--active': selectedMenu == 'dashboard' }]">
                 <i class="pi pi-th-large" style="font-size: 1.5rem"></i>
             </RouterLink>
-            <div @click="selectedMenu = 'database'"
+            <RouterLink to="/workspace-dashboard" @click="selectedMenu = 'database'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'database' }]">
                 <i class="pi pi-database" style="font-size: 1.5rem"></i>
-            </div>
+            </RouterLink>
             <div @click="selectedMenu = 'history'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'history' }]">
                 <i class="pi pi-history" style="font-size: 1.5rem"></i>

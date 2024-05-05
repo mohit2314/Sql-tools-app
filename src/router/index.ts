@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import AppDashboard from '@/components/dashboard/AppDashboard.vue'
 import SqlQueryRunner from '@/components/sql-query-runner/SqlQueryRunner.vue'
 import SqlQueryBuilder from '@/components/sql-query-builder/ToolContainer.vue'
+import WorkspaceDashboard from '@/components/workspaces/WorkspaceDashboard.vue'
 import AppContainer from '@/views/AppContainer.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
         path: '/sql-query-builder',
         name: 'Sql query builder',
         component: SqlQueryBuilder
+      },
+      {
+        path: '/workspace-dashboard',
+        name: 'Workspace Dashboard',
+        component: WorkspaceDashboard
       }
       ]
     },

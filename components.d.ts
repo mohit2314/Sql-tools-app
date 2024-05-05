@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Accordion: typeof import('primevue/accordion')['default']
     AccordionTab: typeof import('primevue/accordiontab')['default']
+    AppChatbot: typeof import('./src/components/dashboard/AppChatbot.vue')['default']
     AppDashboard: typeof import('./src/components/dashboard/AppDashboard.vue')['default']
     Avatar: typeof import('primevue/avatar')['default']
     Badge: typeof import('primevue/badge')['default']
@@ -44,6 +45,7 @@ declare module 'vue' {
     Menubar: typeof import('primevue/menubar')['default']
     MultiSelect: typeof import('primevue/multiselect')['default']
     Navbar: typeof import('./src/components/layout/Navbar.vue')['default']
+    OrganizationChart: typeof import('primevue/organizationchart')['default']
     ProgressSpinner: typeof import('primevue/progressspinner')['default']
     ResultTable: typeof import('./src/components/common/ResultTable.vue')['default']
     RightPanel: typeof import('./src/components/sql-query-builder/RightPanel.vue')['default']
@@ -62,5 +64,7 @@ declare module 'vue' {
     ToolContainer: typeof import('./src/components/sql-query-builder/ToolContainer.vue')['default']
     Tree: typeof import('primevue/tree')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
+    Workspace: typeof import('./src/components/workspaces/Workspace.vue')['default']
+    WorkspaceDashboard: typeof import('./src/components/workspaces/WorkspaceDashboard.vue')['default']
   }
 }

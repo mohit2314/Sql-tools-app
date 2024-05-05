@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
+import AppChatbot from "./AppChatbot.vue";
 const toolsList = ref(
     [
         {
@@ -101,6 +102,7 @@ const navigateToTool = (toolLink: string) => {
             </div>
 
         </div>
+        <AppChatbot />
     </div>
 </template>
 
