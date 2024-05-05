@@ -15,6 +15,7 @@ declare module 'vue' {
     Button: typeof import('primevue/button')['default']
     Card: typeof import('primevue/card')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
+    Chip: typeof import('primevue/chip')['default']
     Column: typeof import('primevue/column')['default']
     ColumnsBlock: typeof import('./src/components/sql-query-builder/builder-blocks/ColumnsBlock.vue')['default']
     DataTable: typeof import('primevue/datatable')['default']
