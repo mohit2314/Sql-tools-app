@@ -25,7 +25,7 @@ const toolsList = ref(
             icon: 'pi pi-file-excel',
             name: 'CSV Chat',
             desc: 'Ask questions about the CSV data',
-            link: 'sql-query-runner',
+            link: 'csv-chat',
             style: "background-color:#FEFCE9;color:#CA8A04",
             tag: ''
 

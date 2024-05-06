@@ -9,6 +9,7 @@ import Faq from "@/components/faq/Faq.vue";
 import ContactForm from "@/components/contactForm/ContactForm.vue";
 import Plans from "@/components/plans/Plans.vue";
 import AppContainer from "@/views/AppContainer.vue";
+import CsvChatContainer from "@/components/csv-chatbot/CsvChatContainer.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,6 +37,11 @@ const router = createRouter({
           path: "/sql-query-builder",
           name: "Sql query builder",
           component: SqlQueryBuilder,
+        },
+        {
+          path: "/csv-chat",
+          name: "CSV Chat",
+          component: CsvChatContainer,
         },
         {
           path: "/workspace-dashboard",
