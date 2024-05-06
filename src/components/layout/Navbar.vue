@@ -1,4 +1,34 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router"
+const router = useRouter()
+const menu = ref();
+const items = ref([
+    {
+        label: 'mohitpatel2314@gmail.com',
+        items: [
+            {
+                label: 'User',
+                icon: 'pi pi-user'
+            },
+            {
+                label: 'Logout',
+                icon: 'pi pi-sign-out',
+                command: () => {
+                    router.push(
+                        '/'
+                    )
+                }
+            }
+        ]
+    }
+]);
+
+const toggle = (event: any) => {
+    menu.value.toggle(event);
+};
+</script>
+
 
 <template>
     <div class="app__header">
@@ -11,8 +41,9 @@
                 <Button @click="$router.push('/plans')" label="Upgrade to pro" icon="pi pi-crown" class="mr-4"
                     iconPos="right" />
                 <i v-badge="2" class="pi pi-bell mr-4" style="font-size: 1.5rem;color:#fff" />
-                <Avatar icon="pi pi-user" class="mr-2" shape="circle" />
+                <Avatar icon="pi pi-user" class="mr-2 user__icon" shape="circle" @click="toggle" />
                 <!-- <Avatar icon="pi pi-user" class="mr-2" /> -->
+                <Menu ref="menu" id="overlay_menu" class="mt-2" :model="items" :popup="true" />
             </div>
         </div>
     </div>
@@ -47,6 +78,11 @@
                 font-size: 28px;
                 font-weight: 600;
             }
+        }
+
+        .user__icon {
+            cursor: pointer;
+
         }
 
     }
