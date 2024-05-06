@@ -8,7 +8,8 @@
                 <span class="app-title ml-2">SQLite</span>
             </div>
             <div class="flex justify-content-end align-items-center" style="width: 30%;">
-                <Button label="Upgrade to pro" icon="pi pi-crown" class="mr-4" iconPos="right" />
+                <Button @click="$router.push('/plans')" label="Upgrade to pro" icon="pi pi-crown" class="mr-4"
+                    iconPos="right" />
                 <i v-badge="2" class="pi pi-bell mr-4" style="font-size: 1.5rem;color:#fff" />
                 <Avatar icon="pi pi-user" class="mr-2" shape="circle" />
                 <!-- <Avatar icon="pi pi-user" class="mr-2" /> -->

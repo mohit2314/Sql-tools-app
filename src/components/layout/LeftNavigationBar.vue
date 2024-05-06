@@ -45,14 +45,14 @@ const showWorkspacePanel = computed({
                 @click="showWorkspacePanel = !showWorkspacePanel"><i class="light-icon-chevron-right"></i></span>
         </div>
         <div>
-            <div @click="selectedMenu = 'support'"
+            <RouterLink to="/contact-form" @click="selectedMenu = 'support'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'support' }]">
                 <i class="pi pi-headphones" style="font-size: 1.5rem"></i>
-            </div>
-            <div @click="selectedMenu = 'info'"
+            </RouterLink>
+            <RouterLink to="/faq" @click="selectedMenu = 'info'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'info' }]">
                 <i class="pi pi-info-circle " style="font-size: 1.5rem"></i>
-            </div>
+            </RouterLink>
         </div>
     </div>
 </template>
