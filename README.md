@@ -27,6 +27,8 @@ npm run dev
 
 https://sqlite-ai.netlify.app/
 
+You will land up on login page, just hit SignIn to land on Product
+
 ## Tech Stack used
 
 1. Vue3 with typescript - beacuse its very approachable, light weight & performant
