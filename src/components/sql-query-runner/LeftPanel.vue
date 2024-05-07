@@ -45,20 +45,30 @@ const items = ref([
         separator: true
     },
     {
-        label: 'Profile',
+        label: 'Sample Queries',
         items: [
             {
-                label: 'Settings',
+                label: 'Fetch query',
                 icon: 'pi pi-cog',
                 shortcut: '⌘+O'
             },
             {
-                label: 'Messages',
+                label: 'Create Database query',
                 icon: 'pi pi-inbox',
                 badge: 2
             },
             {
-                label: 'Logout',
+                label: 'Filter query',
+                icon: 'pi pi-sign-out',
+                shortcut: '⌘+Q'
+            },
+            {
+                label: 'Join query',
+                icon: 'pi pi-sign-out',
+                shortcut: '⌘+Q'
+            },
+            {
+                label: 'Limit query',
                 icon: 'pi pi-sign-out',
                 shortcut: '⌘+Q'
             }
@@ -115,8 +125,10 @@ const items = ref([
             </template>
 
             <template #item="{ item, props }">
-                <Tree v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="single">
+                <Tree v-if="!item.label.includes('query')" v-model:selectionKeys="selectedKey" :value="nodes"
+                    selectionMode="single">
                 </Tree>
+                <span v-else class="p-2">{{ item.label }}</span>
                 <!-- <a v-ripple class="flex align-items-center" v-bind="props.action">
                     <span :class="item.icon" />
                     <span class="ml-2">{{ item.label }}</span>
@@ -126,6 +138,7 @@ const items = ref([
                         }}</span>
                 </a> -->
             </template>
+
             <template #end>
                 <button
                     class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround">
@@ -168,6 +181,10 @@ const items = ref([
         h4 {
             margin-bottom: 0.5rem;
         }
+    }
+
+    .p-tree {
+        padding: 0;
     }
 }
 </style>

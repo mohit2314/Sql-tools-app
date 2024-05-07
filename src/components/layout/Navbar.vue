@@ -33,10 +33,10 @@ const toggle = (event: any) => {
 <template>
     <div class="app__header">
         <div class="header__items">
-            <div class="header__logo">
+            <RouterLink to="/dashboard" class="header__logo">
                 <img src="@/assets/images/app-logo.png" alt="app-logo" width="56px">
                 <span class="app-title ml-2">SQLite</span>
-            </div>
+            </RouterLink>
             <div class="flex justify-content-end align-items-center" style="width: 30%;">
                 <Button @click="$router.push('/plans')" label="Upgrade to pro" icon="pi pi-crown" class="mr-4"
                     iconPos="right" />
@@ -72,6 +72,7 @@ const toggle = (event: any) => {
             width: 80%;
             display: flex;
             align-items: center;
+            text-decoration: none;
 
             .app-title {
                 color: #fff;

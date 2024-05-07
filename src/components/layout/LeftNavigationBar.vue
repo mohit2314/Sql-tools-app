@@ -27,19 +27,24 @@ const showWorkspacePanel = computed({
         <div>
             <RouterLink to="/dashboard" @click="selectedMenu = 'dashboard'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'dashboard' }]">
-                <i class="pi pi-th-large" style="font-size: 1.5rem"></i>
+                <!-- <i class="pi pi-th-large" style="font-size: 1.5rem"></i> -->
+                <!-- <i class="light-icon-apps" style="font-size: 1.5rem"></i> -->
+                <i class="light-icon-grid" style="font-size: 2rem"></i>
             </RouterLink>
             <RouterLink to="/workspace-dashboard" @click="selectedMenu = 'database'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'database' }]">
-                <i class="pi pi-database" style="font-size: 1.5rem"></i>
+                <!-- <i class="pi pi-database" style="font-size: 1.5rem"></i> -->
+                <i class="light-icon-database" style="font-size:2rem"></i>
             </RouterLink>
             <div @click="selectedMenu = 'history'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'history' }]">
-                <i class="pi pi-history" style="font-size: 1.5rem"></i>
+                <!-- <i class="pi pi-history" style="font-size: 1.5rem"></i> -->
+                <i class="light-icon-device-floppy" style="font-size: 2rem"></i>
             </div>
             <div v-if="$route.path.includes('sql-query-builder')" @click="showWorkspacePanel = !showWorkspacePanel"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'history' }]">
-                <i class="pi pi-briefcase   " style="font-size: 1.5rem"></i>
+                <!-- <i class="pi pi-briefcase   " style="font-size: 1.5rem"></i> -->
+                <i class="light-icon-briefcase" style="font-size: 2rem"></i>
             </div>
             <span v-if="!showWorkspacePanel" class="workspace__collapse-btn"
                 @click="showWorkspacePanel = !showWorkspacePanel"><i class="light-icon-chevron-right"></i></span>
@@ -47,11 +52,13 @@ const showWorkspacePanel = computed({
         <div>
             <RouterLink to="/contact-form" @click="selectedMenu = 'support'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'support' }]">
-                <i class="pi pi-headphones" style="font-size: 1.5rem"></i>
+                <!-- <i class="pi pi-headphones" style="font-size: 1.5rem"></i> -->
+                <i class="light-icon-headphones" style="font-size: 2rem"></i>
             </RouterLink>
             <RouterLink to="/faq" @click="selectedMenu = 'info'"
                 :class="['left__navigation-item', { '--active': selectedMenu == 'info' }]">
-                <i class="pi pi-info-circle " style="font-size: 1.5rem"></i>
+                <!-- <i class="pi pi-info-circle " style="font-size: 1.5rem"></i> -->
+                <i class="light-icon-book" style="font-size: 2rem"></i>
             </RouterLink>
         </div>
     </div>
