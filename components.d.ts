@@ -53,6 +53,7 @@ declare module 'vue' {
     MultiSelect: typeof import('primevue/multiselect')['default']
     Navbar: typeof import('./src/components/layout/Navbar.vue')['default']
     OrganizationChart: typeof import('primevue/organizationchart')['default']
+    OverlayPanel: typeof import('primevue/overlaypanel')['default']
     Plans: typeof import('./src/components/plans/Plans.vue')['default']
     ProgressBar: typeof import('primevue/progressbar')['default']
     ProgressSpinner: typeof import('primevue/progressspinner')['default']

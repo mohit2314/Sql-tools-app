@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+import { useAppStore, type Database } from '@/store/index'
+import SqlEditor from "../common/SqlEditor.vue";
 import { WorkspaceService } from "@/mock-data/WorkspacesData";
-// Interface for database selection (replace with actual data)
-interface Database {
-    name: string;
-    tables: string[];
-}
+const store = useAppStore()
+
+
 
 const databases: Database[] = [
     { name: "Database 1", tables: ["Table 1", "Table 2", "Table 3"] },
@@ -44,78 +44,151 @@ const items = ref([
     {
         separator: true
     },
-    {
-        label: 'Sample Queries',
-        items: [
-            {
-                label: 'Fetch query',
-                icon: 'pi pi-cog',
-                shortcut: '⌘+O'
-            },
-            {
-                label: 'Create Database query',
-                icon: 'pi pi-inbox',
-                badge: 2
-            },
-            {
-                label: 'Filter query',
-                icon: 'pi pi-sign-out',
-                shortcut: '⌘+Q'
-            },
-            {
-                label: 'Join query',
-                icon: 'pi pi-sign-out',
-                shortcut: '⌘+Q'
-            },
-            {
-                label: 'Limit query',
-                icon: 'pi pi-sign-out',
-                shortcut: '⌘+Q'
-            }
-        ]
-    },
+
     {
         separator: true
     }
 ]);
+const showWorkspacePanel = computed({
+    get() {
+        return store.showWorkspacePanel
+    },
+    set(val) {
+        store.showWorkspacePanel = val
+    }
+})
+const sampleQueries = ref([
+    {
+        label: 'Fetch query', query: `SELECT Name, City, CompanyName
+FROM Customers;
+` },
+    {
+        label: 'Create Table query', query: `CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50)
+);
+` },
+    { label: 'Filter query', query: '' },
+    {
+        label: 'Sort query', query: `SELECT
+  *
+FROM
+  customers
+ORDER BY
+  customers.ContactName asc
+LIMIT
+  10` },
+    {
+        label: 'Limit query', query: `SELECT
+*
+FROM
+customers
+LIMIT
+10`}
+
+])
+const sqlQuery = computed({
+    get() {
+        return store.sqlQuery
+    },
+    set(val) {
+        store.sqlQuery = val
+    }
+})
+const templateQueryPopup = ref();
+let selectedTemplateQuery = ref({ label: '', query: `` })
+const openTemplatePreview = (event: any, option: any) => {
+    selectedTemplateQuery = option
+    console.log(selectedTemplateQuery)
+    templateQueryPopup.value.toggle(event);
+}
+const useTemplateQuery = (templateQuery: string) => {
+    sqlQuery.value = templateQuery
+}
+const copyQuery = async (queryToCopy: string) => {
+    try {
+        await navigator.clipboard.writeText(queryToCopy);
+        console.log('Query copied!');
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+}
 </script>
 
 <template>
-    <div class="sql__runner--left-panel">
-        <!-- <div class="header"><i class="pi pi-briefcase mr-2"></i> Workspace</div>
-        <div class="workspace-management">
-            <h4>Workspace</h4>
-        </div>
-        <div class="database-selection">
-            <label for="database">Database:</label>
-            <select v-model="selectedDatabase" id="database">
-                <option v-for="db in databases" :key="db.name">{{ db.name }}</option>
-            </select>
+    <div class="sql__builder--left-panel">
+        <span class="flex align-items-center gap-1 px-2 py-2 text-center">
+
+            <i class="pi pi-briefcase" color="bg-primary"></i>
+            <span class="font-medium text-xl font-semibold">WORK<span class="text-primary">SPACES</span></span>
+
+        </span>
+
+        <Divider />
+        <div class="flex flex-column gap-4 p-2" style="position: relative;">
+            <span class="workspace__collapse-btn" @click="showWorkspacePanel = !showWorkspacePanel"><i
+                    class="light-icon-chevron-left"></i></span>
+            <div class="flex flex-column gap-2 w-full">
+                <label for="workspacesDropdown" class="text-primary font-bold"><i
+                        class="pi pi-database mr-2"></i>Databases</label>
+                <Tree v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="single">
+                </Tree>
+            </div>
+            <!-- <div class="flex flex-column gap-2">
+                <label for="databasesDropdown" class="text-primary font-bold"><i class="pi pi-database mr-2"></i>Select
+                    database</label>
+                <Dropdown id="databasesDropdown" v-model="selectedDatabase" :options="availableDatabases"
+                    optionLabel="name" placeholder="Select database" checkmark :highlightOnSelect="false"
+                    class="w-full" />
+            </div> -->
+            <div>
+                <div class="text-primary font-bold"><i class="pi pi-table mr-2"></i> Sample queries</div>
+                <Listbox v-model="selectedTable" :options="sampleQueries" filter filterPlaceholder="Search queries..."
+                    class="w-full md:w-14rem">
+                    <template #option="slotProps">
+                        <div class="flex align-items-center justify-content-center">
+                            <div @click="openTemplatePreview($event, slotProps.option)" class="flex align-items-center">
+                                <i class="light-icon-code mr-2" style="font-size: 1.2rem;"></i> {{
+                                    slotProps.option.label }}
+                            </div>
+                        </div>
+                    </template>
+
+                </Listbox>
+                <OverlayPanel ref="templateQueryPopup">
+                    <div class="flex flex-column gap-3 w-25rem">
+                        <div class="flex align-items-center justify-content-between">
+                            <span class=" font-medium text-900 block mb-2">{{ selectedTemplateQuery.label }}
+                            </span>
+                            <span>
+                                <Button @click="useTemplateQuery(selectedTemplateQuery.query)"
+                                    v-tooltip="'Use this query'" text><i class="light-icon-terminal-2 mr-2"
+                                        style="font-size: 1.2rem;"></i></Button>
+                                <Button @click="copyQuery(selectedTemplateQuery.query)" v-tooltip="'Copy query'" text>
+                                    <i class="pi pi-copy" style="font-size: 1.2rem;"></i></Button>
+                            </span>
+                        </div>
+                        <div>
+                            <SqlEditor :key="selectedTemplateQuery.label" :propQuery="selectedTemplateQuery.query"
+                                :theme="'base16-light'" :width="'200px'" :height="'200'" :readOnly="true"
+                                :cursorBlinkRate="-1" />
+                        </div>
+                    </div>
+                </OverlayPanel>
+
+            </div>
+
         </div>
 
-        <div class="available-tables" v-if="selectedDatabase">
-            <h4>Tables in {{ selectedDatabase.name }}</h4>
-            <ul>
-                <li v-for="table in selectedDatabase.tables" :key="table">{{ table }}</li>
-            </ul>
-        </div> -->
-
-        <!-- <Toast />
-            <Tree v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="single" class="w-full md:w-30rem">
-            </Tree> -->
+    </div>
+    <!-- <div class="sql__runner--left-panel">
+     
 
         <Menu :model="items" class="w-6 md:w-12rem">
             <template #start>
                 <span class="inline-flex align-items-center gap-1 px-2 py-2">
-                    <!-- <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        class="h-2rem">
-                        <path
-                            d="M25.87 18.05L23.16 17.45L25.27 20.46V29.78L32.49 23.76V13.53L29.18 14.73L25.87 18.04V18.05ZM25.27 35.49L29.18 31.58V27.67L25.27 30.98V35.49ZM20.16 17.14H20.03H20.17H20.16ZM30.1 5.19L34.89 4.81L33.08 12.33L24.1 15.67L30.08 5.2L30.1 5.19ZM5.72 14.74L2.41 13.54V23.77L9.63 29.79V20.47L11.74 17.46L9.03 18.06L5.72 14.75V14.74ZM9.63 30.98L5.72 27.67V31.58L9.63 35.49V30.98ZM4.8 5.2L10.78 15.67L1.81 12.33L0 4.81L4.79 5.19L4.8 5.2ZM24.37 21.05V34.59L22.56 37.29L20.46 39.4H14.44L12.34 37.29L10.53 34.59V21.05L12.42 18.23L17.45 26.8L22.48 18.23L24.37 21.05ZM22.85 0L22.57 0.69L17.45 13.08L12.33 0.69L12.05 0H22.85Z"
-                            fill="var(--primary-color)" />
-                        <path
-                            d="M30.69 4.21L24.37 4.81L22.57 0.69L22.86 0H26.48L30.69 4.21ZM23.75 5.67L22.66 3.08L18.05 14.24V17.14H19.7H20.03H20.16H20.2L24.1 15.7L30.11 5.19L23.75 5.67ZM4.21002 4.21L10.53 4.81L12.33 0.69L12.05 0H8.43002L4.22002 4.21H4.21002ZM21.9 17.4L20.6 18.2H14.3L13 17.4L12.4 18.2L12.42 18.23L17.45 26.8L22.48 18.23L22.5 18.2L21.9 17.4ZM4.79002 5.19L10.8 15.7L14.7 17.14H14.74H15.2H16.85V14.24L12.24 3.09L11.15 5.68L4.79002 5.2V5.19Z"
-                            fill="var(--text-color)" />
-                    </svg> -->
+                
                     <i class="pi pi-briefcase" color="bg-primary"></i>
                     <span class="font-medium text-xl font-semibold">WORK<span class="text-primary">SPACES</span></span>
                 </span>
@@ -129,14 +202,7 @@ const items = ref([
                     selectionMode="single">
                 </Tree>
                 <span v-else class="p-2">{{ item.label }}</span>
-                <!-- <a v-ripple class="flex align-items-center" v-bind="props.action">
-                    <span :class="item.icon" />
-                    <span class="ml-2">{{ item.label }}</span>
-                    <Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
-                    <span v-if="item.shortcut"
-                        class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut
-                        }}</span>
-                </a> -->
+         
             </template>
 
             <template #end>
@@ -152,7 +218,7 @@ const items = ref([
             </template>
         </Menu>
 
-    </div>
+    </div> -->
 </template>
 <style lang="scss">
 .sql__runner--left-panel {

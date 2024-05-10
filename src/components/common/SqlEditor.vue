@@ -1,6 +1,9 @@
 <template>
-    <Codemirror :key="theme" v-model:value="sqlQuery" :options="cmOptions" border ref="cmRef"
-        class="code__mirror--editor" height="346" style="width: 100%;">
+    <Codemirror v-if="propQuery" :key="theme" :value="propQuery" :options="cmOptions" :readOnly="readOnly" border
+        ref="cmRef" class="code__mirror--editor" :height="height" style="width: 100%;">
+    </Codemirror>
+    <Codemirror v-else v-model:value="sqlQuery" :options="cmOptions" :readOnly="readOnly" border ref="cmRef"
+        class="code__mirror--editor" :height="height" style="width: 100%;">
     </Codemirror>
 </template>
 <script lang="ts" setup>
@@ -10,6 +13,7 @@ import "codemirror/mode/sql/sql.js";
 import "codemirror/theme/ayu-dark.css"
 import "codemirror/theme/cobalt.css"
 import "codemirror/theme/elegant.css"
+import "codemirror/theme/base16-light.css"
 import Codemirror from "codemirror-editor-vue3"
 import { useAppStore } from '@/store/index'
 const props = defineProps(
@@ -21,6 +25,22 @@ const props = defineProps(
         'theme': {
             type: String,
             default: "default"
+        },
+        'readOnly': {
+            type: Boolean,
+            default: false
+        },
+        'height': {
+            type: String,
+            default: "346"
+        },
+        'cursorBlinkRate': {
+            type: Number,
+            default: 530
+        },
+        'propQuery': {
+            type: String,
+            default: ''
         }
     },
 
@@ -52,7 +72,10 @@ const code = ref(
 const cmRef = ref()
 const cmOptions = {
     mode: "sql",
-    theme: props.theme
+    theme: props.theme,
+    readOnly: props.readOnly,
+    height: props.height,
+    cursorBlinkRate: props.cursorBlinkRate
 }
 
 

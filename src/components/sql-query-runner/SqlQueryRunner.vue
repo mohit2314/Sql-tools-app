@@ -90,12 +90,20 @@ onMounted(() => {
           `
     store.updateSqlQuery(builderTemplateQuery)
 })
+const showWorkspacePanel = computed({
+    get() {
+        return store.showWorkspacePanel
+    },
+    set(val) {
+        store.showWorkspacePanel = val
+    }
+})
 </script>
 
 <template>
     <div class="sql__runner--tool">
 
-        <LeftPanel />
+        <LeftPanel v-if="showWorkspacePanel" />
         <div class="sql__runner--center-panel">
             <div class="sql__query-runner-block">
                 <div class="editor__header">
@@ -109,7 +117,7 @@ onMounted(() => {
                         Run Query
                     </Button>
                     <Button @click="showSaveQueryModal = true" class="flex justify-content-center" type="button"
-                        label="Save Query" icon="pi pi-save" badgeSeverity="contrast" outlined />
+                        badgeSeverity="contrast" outlined><i class="pi pi-save mr-2"></i> Save Query</Button>
                 </div>
             </div>
             <Divider />
