@@ -10,6 +10,7 @@ import ContactForm from "@/components/contactForm/ContactForm.vue";
 import Plans from "@/components/plans/Plans.vue";
 import AppContainer from "@/views/AppContainer.vue";
 import CsvChatContainer from "@/components/csv-chatbot/CsvChatContainer.vue";
+import GraphBuilder from "@/components/graph-builder/GraphBuilder.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -42,6 +43,11 @@ const router = createRouter({
           path: "/csv-chat",
           name: "CSV Chat",
           component: CsvChatContainer,
+        },
+        {
+          path: "/graph-builder",
+          name: "Graph Builder",
+          component: GraphBuilder,
         },
         {
           path: "/workspace-dashboard",

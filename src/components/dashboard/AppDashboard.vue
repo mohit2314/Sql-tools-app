@@ -34,7 +34,7 @@ const toolsList = ref(
             icon: 'pi pi-chart-bar',
             name: 'Graph Builder',
             desc: 'Build any kind of graph for your result set effortlessly.',
-            link: 'sql-query-runner',
+            link: 'graph-builder',
             style: "background-color:#e6e2f6;color: #7e2faa;",
             tag: ''
 
