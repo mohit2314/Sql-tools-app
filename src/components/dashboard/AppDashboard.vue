@@ -72,7 +72,7 @@ const navigateToTool = (toolLink: string) => {
         <div class="tools__container">
             <div class="section__header mb-4">All Tools</div>
             <div class="tools__card-list">
-                <div @click="navigateToTool(tool.link)" class="tool__card" v-for="tool in toolsList.slice(0, 3)"
+                <div @click="navigateToTool(tool.link)" class="tool__card" v-for="tool in toolsList.slice(0, 4)"
                     :style="tool.style" :key="tool.name">
                     <span class="tool__logo"><i :class="tool.icon"></i></span>
                     <div>
@@ -87,7 +87,7 @@ const navigateToTool = (toolLink: string) => {
                 </div>
                 <!-- Coming soon -->
                 <div @click="navigateToTool(tool.link)" class="tool__card" v-badge.info="'Coming soon'"
-                    v-for="tool in toolsList.slice(3, 6)" :style="tool.style" :key="tool.name">
+                    v-for="tool in toolsList.slice(4, 6)" :style="tool.style" :key="tool.name">
                     <span class="tool__logo"><i :class="tool.icon"></i></span>
                     <div>
                         <div class="tool__title">
