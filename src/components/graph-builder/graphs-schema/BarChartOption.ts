@@ -157,7 +157,7 @@ interface BarChartData {
 }
 
 export const BarChartOptions: BarChartData = {
-    icon: 'bar-graph.png',
+    icon: 'barGraph',
     title: 'bar-chart',
     subtitle: 'Correlations',
     active: true,

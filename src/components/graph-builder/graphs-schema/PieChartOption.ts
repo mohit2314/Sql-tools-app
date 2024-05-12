@@ -65,7 +65,7 @@ interface PieChartData {
     options: PieChartOption
 }
 export const PieChartOptions: PieChartData = {
-    icon: 'pie-chart.png',
+    icon: 'pieChart',
 
     title: 'pie-chart',
     subtitle: 'Proportions',

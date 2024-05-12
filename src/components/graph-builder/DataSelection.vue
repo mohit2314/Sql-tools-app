@@ -6,6 +6,7 @@ import { useGraphBuilderStore } from '@/store/graphBuilder'
 import { mockData } from './mock-data/TableDatasets';
 import { dataTransformer } from './ChartTransformer';
 import { storeToRefs } from "pinia";
+import graphTypeImages from '@/assets/images/graph-builder';
 const { selectedChartOptions } = storeToRefs(useGraphBuilderStore());
 const graphStore = useGraphBuilderStore()
 
@@ -140,7 +141,9 @@ const changeGraphType = (graphOptions: any) => {
                 <div class="flex flex-wrap gap-2 mt-4">
                     <span @click="changeGraphType(graph)" class="graph__type-card p-2" v-for="graph in graphTypes"
                         :key="graph.title">
-                        <img width="44px" :src="getGraphTypesImageUrl(graph.icon)" alt="">
+                        <!-- <img width="44px" :src="getGraphTypesImageUrl(graph.icon)" alt=""> -->
+                        <img width="44px" :src="graphTypeImages[graph.icon]" alt="">
+
                     </span>
                 </div>
             </div>

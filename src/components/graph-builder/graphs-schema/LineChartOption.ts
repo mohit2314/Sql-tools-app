@@ -124,7 +124,7 @@ interface LineChartData {
     options: LineChartOption
 }
 export const LineChartOptions: LineChartData = {
-    icon: 'line-graph.png',
+    icon: 'lineGraph',
 
     title: 'line-chart',
     subtitle: 'Time series, correlations',

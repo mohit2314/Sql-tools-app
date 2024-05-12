@@ -131,7 +131,7 @@ interface BarChartData {
 }
 
 export const HorizontalBarChartOptions: BarChartData = {
-    icon: 'horizontal-bar.png',
+    icon: 'horizontalBar',
 
     title: 'horizontal-bar-chart',
     subtitle: 'Correlations',

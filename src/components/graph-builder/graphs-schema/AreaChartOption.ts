@@ -111,7 +111,7 @@ interface LineChartData {
     options: LineChartOption
 }
 export const AreaChartOptions: LineChartData = {
-    icon: 'area-graph.png',
+    icon: 'areaGraph',
 
     title: 'area-chart',
     subtitle: 'Time series, correlations',
