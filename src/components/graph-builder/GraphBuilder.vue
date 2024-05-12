@@ -6,7 +6,7 @@ import GraphRenderSection from "./GraphRenderSection.vue";
 
 <template>
     <div class="graph__builder--container flex">
-        <div class="left__section p-4">
+        <div class="left__section p-3">
             <DataSelection />
         </div>
         <div class="right__section">
@@ -17,15 +17,22 @@ import GraphRenderSection from "./GraphRenderSection.vue";
 
 <style lang="scss">
 .graph__builder--container {
-    height: 100%;
+    // height: 100%;
+    height: calc(100vh - 56px);
 
     .left__section {
-        width: 30%;
+        width: 35%;
         border-right: 1px solid #dedede;
     }
 
     .right__section {
-        width: 70%;
+        width: 65%;
+        // height: 100%;
+        padding: 0;
+        padding-left: 15px;
+        border: none;
+        // z-index: 30;
+        background: #f3f4fa;
     }
 }
 </style>
