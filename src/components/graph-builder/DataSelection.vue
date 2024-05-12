@@ -59,8 +59,8 @@ const plotGraph = () => {
 onMounted(() => {
 })
 const getGraphTypesImageUrl = (iconName: string) => {
-    const imagePath = `/src/assets/images/graph-builder/${iconName}`
-    return new URL(imagePath, import.meta.url).href
+    const imagePath = `${import.meta.env.BASE_URL}src/assets/images/graph-builder/${iconName}`;
+    return imagePath;
 }
 const changeGraphType = (graphOptions: any) => {
     // selectedChartOptions = graphOptions
