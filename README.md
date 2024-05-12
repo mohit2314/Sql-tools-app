@@ -1,6 +1,6 @@
 # Sql Query Runner App
 
-This template should help get you started developing with Vue 3 in Vite.
+[Product Demo Video](https://www.loom.com/share/3e301063524f4e4fa57a36b01d6066a1)
 
 ## Recommended IDE Setup
 
